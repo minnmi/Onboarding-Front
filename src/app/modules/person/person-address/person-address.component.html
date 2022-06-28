@@ -1,0 +1,82 @@
+<div class="app-person-address">
+  <div class="person-address">
+    <div class="grid">
+      <div class="col-6">
+        <div class="col-12">
+          <label>Endereço</label>
+        </div>
+        <input [(ngModel)]="place" class="input" pInputText type="text"/>
+      </div>
+      <div class="col-6">
+        <div class="col-12">
+          <label>Bairro</label>
+        </div>
+        <input [(ngModel)]="neighborhood" class="input" pInputText type="text"/>
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label>CEP</label>
+        </div>
+        <p-inputMask [(ngModel)]="cep" [mask]="getCepMask()"></p-inputMask>
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label>Município</label>
+        </div>
+        <input [(ngModel)]="city" class="input" pInputText type="text"/>
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label>UF</label>
+        </div>
+        <input [(ngModel)]="uf" class="input" pInputText type="text"/>
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label style="visibility: hidden">Hidden</label>
+        </div>
+        <p-button (click)="clickAdd()"
+                  [disabled]="!filledFields()"
+                  icon="pi pi-plus"
+                  iconPos="left"
+                  label="Adicionar">
+        </p-button>
+      </div>
+    </div>
+    <div class="table-panel">
+      <div class="title-two">
+        <span>Endereço</span>
+      </div>
+    </div>
+    <p-table [value]="addresses" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-address">Endereço</th>
+          <th class="col-neighborhood">Bairro</th>
+          <th class="col-cep" style="text-align: center">CEP</th>
+          <th class="col-city">Município</th>
+          <th class="col-uf" style="text-align: center">UF</th>
+          <th class="col-status" style="text-align: center">Padrão</th>
+          <th class="col-action" style="text-align: center">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template let-address let-index="rowIndex" pTemplate="body">
+        <tr>
+          <td class="col-address">{{toAddress(address).place}}</td>
+          <td class="col-neighborhood">{{toAddress(address).neighborhood}}</td>
+          <td class="col-cep" style="text-align: center">{{toAddress(address).cep}}</td>
+          <td class="col-city">{{toAddress(address).city}}</td>
+          <td class="col-uf" style="text-align: center">{{toAddress(address).uf}}</td>
+          <td class="col-status" style="text-align: center">
+            <p-radioButton (click)="setAsDefault(index)" [(ngModel)]="toAddress(address).addressDefault"
+                           [inputId]="index" [value]="'S'" name="option"></p-radioButton>
+          </td>
+          <td class="col-action" style="text-align: center">
+            <p-button (click)="clickEdit(address)" class="button-item" icon="pi pi-pencil"></p-button>
+            <p-button (click)="clickDelete(index)" class="button-item" icon="pi pi-trash"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

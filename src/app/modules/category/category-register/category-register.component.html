@@ -1,0 +1,47 @@
+<app-template>
+  <div class="category-register">
+    <div class="panel-container">
+      <div class="header-container">
+        <span class="title">Categoria</span>
+        <p-fieldset legend="Novo">
+          <div class="search-panel">
+            <div class="search-container">
+              <div class="input-container">
+                <label>Nome</label>
+                <input [(ngModel)]="category.name"
+                       class="input" pInputText
+                       type="text"/>
+              </div>
+              <div class="container-situacao">
+                <label>Situação</label>
+                <div class="radio-button">
+                  <p-radioButton [(ngModel)]="category.status" label="Ativo" name="groupname"
+                                 value="ATIVO"></p-radioButton>
+                  <p-radioButton [(ngModel)]="category.status" label="Inativo" name="groupname"
+                                 value="INATIVO"></p-radioButton>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="button-container">
+            <p-button
+              (onClick)="clickSalvar()"
+              [style]="{marginRight: '4rem'}"
+              icon="pi pi-search"
+              iconPos="left"
+              label="Salvar"
+              styleClass="button"
+            ></p-button>
+            <p-button
+              [routerLink]="['/category']"
+              icon="pi pi-refresh"
+              iconPos="left"
+              label="Cancelar"
+              styleClass="button"
+            ></p-button>
+          </div>
+        </p-fieldset>
+      </div>
+    </div>
+  </div>
+</app-template>

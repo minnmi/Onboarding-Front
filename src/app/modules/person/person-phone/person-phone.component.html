@@ -1,0 +1,55 @@
+<div class="app-person-phone">
+  <div class="person-phone">
+    <div class="grid">
+      <div class="col-6">
+        <div class="col-12">
+          <label>Tipo</label>
+        </div>
+        <p-dropdown [(ngModel)]="selectedPhone" [options]="type" optionLabel="name"
+                    placeholder="Selecione"></p-dropdown>
+      </div>
+      <div class="col-6">
+        <div class="col-12">
+          <label>Nr. Telefone</label>
+        </div>
+        <input [(ngModel)]="phone" pInputText type="text">
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label style="visibility: hidden">Hidden</label>
+        </div>
+        <p-button (onClick)="clickAdd()" [disabled]="!filledFields()" icon="pi pi-plus" iconPos="left" label="Adicionar"
+                  styleClass="button"></p-button>
+      </div>
+    </div>
+    <div class="table-panel">
+      <div class="title-two">
+        <span>Contatos</span>
+      </div>
+    </div>
+    <p-table [value]="phones" styleClass="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-type">Tipo</th>
+          <th class="col-phone">Nr. Telefone</th>
+          <th class="col-status" style="text-align: center">Padrão</th>
+          <th class="col-action" style="text-align: center">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template let-index="rowIndex" let-phone pTemplate="body">
+        <tr>
+          <td class="col-type">{{toPhone(phone).phoneType}}</td>
+          <td class="col-phone">{{toPhone(phone).phone}}</td>
+          <td class="col-status" style="text-align: center">
+            <p-radioButton (click)="setAsDefault(index)" [ngModel]="toPhone(phone).phoneDefault"
+                           [value]="'S'" name="options"></p-radioButton>
+          </td>
+          <td class="col-action" style="text-align: center">
+            <p-button (onClick)="clickEdit(phone)" class="button-item" icon="pi pi-pencil"></p-button>
+            <p-button (onClick)="clickDelete(index)" class="button-item" icon="pi pi-trash"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

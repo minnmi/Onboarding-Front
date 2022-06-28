@@ -1,0 +1,133 @@
+<app-template>
+  <div class="sale-register">
+    <div class="sale-container">
+      <span class="title">Venda de Produtos</span>
+      <p-panel class="Tela de Venda" header="Tela de Venda">
+        <div class="client-seller-container grid">
+          <div class="col-3">
+            <div class="col-12">
+              <label>Data</label>
+            </div>
+            <p-calendar [(ngModel)]="sale.saleDate" dateFormat="dd/mm/yy"></p-calendar>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Vendedor</label>
+            </div>
+            <input [(ngModel)]="sale.userSale" class="input input-fix" pInputText type="text">
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Cliente</label>
+            </div>
+            <p-autoComplete (completeMethod)="personsSearch($event)" (onSelect)="onSelectPerson($event)"
+                            [(ngModel)]="personSelected"
+                            [forceSelection]="true" [suggestions]="personFiltereds" class="autoComplete"
+                            field="name" placeholder="Selecione o cliente">
+            </p-autoComplete>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Observação</label>
+            </div>
+            <input [(ngModel)]="sale.comment" class="input-comment" pInputText type="text">
+          </div>
+        </div>
+        <div class="mt-4 product-container">
+          <div class="grid">
+            <div class="col-3">
+              <div class="col-12">
+                <label>Pesquisa de Produto</label>
+              </div>
+              <p-autoComplete (completeMethod)="productsSearch($event)" (onSelect)="onSelectProduct($event)"
+                              [(ngModel)]="productSelected"
+                              [forceSelection]="true" [suggestions]="productFiltereds" class="autoComplete"
+                              field="name" placeholder="Selecione o produto">
+              </p-autoComplete>
+            </div>
+            <div class="col-3">
+              <div class="col-12">
+                <label>Quantidade</label>
+              </div>
+              <p-inputNumber [(ngModel)]="quantity" [max]="product.quantity" [min]="1"></p-inputNumber>
+            </div>
+            <div class="col-3">
+              <div class="col-12">
+                <label>Valor Unitário</label>
+              </div>
+              <p-inputNumber [(ngModel)]="product.value" [disabled]="true" currency="BRL" locale="pt-BR"
+                             mode="currency"></p-inputNumber>
+            </div>
+            <div class="col-3">
+              <div class="col-12">
+                <label>Desconto</label>
+              </div>
+              <p-inputNumber [(ngModel)]="product.discountValue" [disabled]="true" currency="BRL" locale="pt-BR"
+                             mode="currency"></p-inputNumber>
+            </div>
+            <div class="col-12 button-container">
+              <p-button (onClick)="clickAdd()" icon="pi pi-plus" iconPos="left" label="Adicionar"
+                        styleClass="button"></p-button>
+            </div>
+          </div>
+        </div>
+        <div class="product-table my-4">
+          <div class="table-panel">
+          </div>
+          <p-table [paginator]="true"
+                   [rows]="10"
+                   [value]="sale.saleProductList">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="col-number">#</th>
+                <th class="col-code">Código</th>
+                <th class="col-description">Descrição</th>
+                <th class="col-quantity">Quantidade</th>
+                <th class="col-value">Preço Unitário</th>
+                <!--              <th class="col-discountValue">Desconto Unitário</th>-->
+                <th class="col-totalValue">Preço Total</th>
+              </tr>
+            </ng-template>
+            <ng-template let-i="rowIndex" let-product pTemplate="body">
+              <tr>
+                <td class="col-number">{{ i + 1 }}</td>
+                <td class="col-code">{{ product.id }}</td>
+                <td class="col-description">{{ product.name }}</td>
+                <td class="col-quantity">{{ product.quantity  }}</td>
+                <td class="col-value">{{ product.value | currency: 'BRL'}}</td>
+                <!--                <td class="col-discountValue">{{ product.discountValue }}</td>-->
+                <td class="col-totalValue">{{ product.value * product.quantity | currency: 'BRL'}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="table-panel-2">
+        </div>
+        <div class="value-table justify-content-center grid">
+          <p-table [value]="[{}]" class="col-10">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Total Bruto</th>
+                <th>Desconto</th>
+                <th>Total</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr>
+                <td class="table-data">{{ totalValue | currency: 'BRL' }}</td>
+                <td class="table-data">{{totalDiscount | currency: 'BRL'}}</td>
+                <td class="table-data">{{ totalValue - totalDiscount | currency: 'BRL'}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="button-container">
+          <p-button (onClick)="clickSave()" icon="pi pi-check" iconPos="left" label="Salvar"
+                    styleClass="button"></p-button>
+          <p-button [routerLink]="['/home']" icon="pi pi-times" iconPos="left" label="Cancelar"
+                    styleClass="button"></p-button>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</app-template>

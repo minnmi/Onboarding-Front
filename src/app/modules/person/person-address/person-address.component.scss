@@ -1,0 +1,22 @@
+::ng-deep .person-address {
+
+  .p-button {
+    width: 50%;
+  }
+
+  .table-panel {
+    display: flex;
+    justify-content: space-between;
+    background: #2555BE;
+    align-content: center;
+    padding: 0.3rem 1rem;
+
+    .title-two {
+      color: white;
+      font-size: 1.2rem;
+      align-items: center;
+      display: flex;
+      height: 20px;
+    }
+  }
+}

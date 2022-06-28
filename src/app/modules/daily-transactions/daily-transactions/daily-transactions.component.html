@@ -1,0 +1,135 @@
+<app-template>
+  <div class="transactions-list">
+    <div class="painel-container">
+      <div class="header-container">
+        <span class="title">Consulta</span>
+        <p-fieldset legend="Movimento Diário">
+          <div class="grid">
+            <div class="col-2">
+              <div class="col-6">
+                <label>Data Inicial</label>
+              </div>
+              <p-inputMask [(ngModel)]="dailyTransactionsRequest.startDate" mask="99/99/9999"></p-inputMask>
+            </div>
+            <div class="col-2">
+              <div class="col-6">
+                <label>Data Final</label>
+              </div>
+              <p-inputMask [(ngModel)]="dailyTransactionsRequest.endDate" mask="99/99/9999"></p-inputMask>
+            </div>
+            <div class="col-2">
+              <div class="col-6">
+                <label>Valor Inicial</label>
+              </div>
+              <p-inputNumber [(ngModel)]="dailyTransactionsRequest.startValue" [inputStyle]="{'text-align': 'right'}"
+                             currency="BRL"
+                             locale="pt-BR" mode="currency"></p-inputNumber>
+            </div>
+            <div class="col-2">
+              <div class="col-6">
+                <label>Valor Final</label>
+              </div>
+              <p-inputNumber [(ngModel)]="dailyTransactionsRequest.endValue" [inputStyle]="{'text-align': 'right'}"
+                             currency="BRL"
+                             locale="pt-BR" mode="currency"></p-inputNumber>
+            </div>
+            <div class="col-2">
+              <div class="col-6">
+                <label>Vendedor</label>
+              </div>
+              <input [(ngModel)]="dailyTransactionsRequest.userSale" pInputText placeholder="Selecione o vendedor"
+                     type="text">
+            </div>
+          </div>
+          <div class="grid">
+            <div class="col-3" style="width: 16.6%">
+              <div class="col-6">
+                <label>Produto</label>
+              </div>
+              <p-autoComplete (completeMethod)="productsSearch($event)" (onSelect)="onSelectProduct($event)"
+                              [(ngModel)]="productSelected" [forceSelection]="true" [suggestions]="productFiltereds"
+                              class="autoComplete"
+                              field="name" placeholder="Selecione o produto">
+              </p-autoComplete>
+            </div>
+            <div class="col-2">
+              <div class="col-12">
+                <label>Cliente</label>
+              </div>
+              <p-autoComplete (completeMethod)="personsSearch($event)" (onSelect)="onSelectPerson($event)"
+                              [(ngModel)]="personSelected" [forceSelection]="true" [suggestions]="personFiltereds"
+                              class="autoComplete"
+                              field="name" placeholder="Selecione o cliente">
+              </p-autoComplete>
+            </div>
+            <div class="col-2">
+              <div class="col-6">
+                <label>Situação</label>
+              </div>
+              <p-dropdown
+                [(ngModel)]="dailyTransactionsRequest.status"
+                [options]="statusOptions"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Selecione">
+              </p-dropdown>
+            </div>
+          </div>
+          <div class="button-container">
+            <p-button
+              (click)="loadData()"
+              icon="pi pi-search"
+              iconPos="left"
+              label="Pesquisar"
+              styleClass="button"
+            ></p-button>
+            <p-button
+              (click)="limpar()"
+              icon="pi pi-refresh"
+              iconPos="left"
+              label="Limpar"
+              styleClass="button"
+            ></p-button>
+            <p-button
+              (click)="reportBuilder()"
+              icon="pi pi-print"
+              iconPos="left"
+              label="Imprimir"
+              styleClass="button"
+            ></p-button>
+          </div>
+        </p-fieldset>
+      </div>
+      <div class="product-table my-4">
+        <div class="table-panel">
+        </div>
+        <p-table [paginator]="true"
+                 [rows]="10"
+                 [value]="dailyTransactionsResults">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="col-number">#</th>
+              <th class="col-date">Data</th>
+              <th class="col-product">Produto</th>
+              <th class="col-quantity">Quantidade</th>
+              <th class="col-value">valor</th>
+              <th class="col-client">Cliente</th>
+              <th class="col-userSale">Vendedor</th>
+            </tr>
+          </ng-template>
+          <ng-template let-dailyTransactions let-i="rowIndex" pTemplate="body">
+            <tr>
+              <td class="col-number">{{ dailyTransactions.saleIdentity }}</td>
+              <td class="col-date">{{ formatUS(dailyTransactions.saleDate) }}</td>
+              <td class="col-product">{{ dailyTransactions.product }}</td>
+              <td class="col-quantity">{{ dailyTransactions.quantity }}</td>
+              <td class="col-value">{{ dailyTransactions.value }}</td>
+              <td class="client">{{ dailyTransactions.person }}</td>
+              <td class="col-userSale">{{ dailyTransactions.userSale }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</app-template>

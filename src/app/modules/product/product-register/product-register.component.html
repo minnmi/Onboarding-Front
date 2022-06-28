@@ -1,0 +1,92 @@
+<app-template>
+  <div class="product-register">
+    <div class="product-container">
+      <span class="title">Produtos e Serviços</span>
+      <p-panel class="novo" header="Novo">
+        <div class="grid">
+          <div class="col-6">
+            <div class="col-12">
+              <label>Nome</label>
+            </div>
+            <input [(ngModel)]="name" class="input" pInputText type="text"/>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Categoria</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="category"
+              [options]="categories"
+              optionLabel="name"
+              placeholder="Selecione"
+            ></p-dropdown>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Situação</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="status"
+              [options]="statusOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Selecione"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="col-3">
+            <div class="col-12">
+              <label>Valor</label>
+            </div>
+            <p-inputNumber
+              [(ngModel)]="value"
+              currency="BRL"
+              locale="pt-BR"
+              mode="currency"
+            ></p-inputNumber>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Desconto</label>
+            </div>
+            <p-inputNumber
+              [(ngModel)]="discountValue"
+              currency="BRL"
+              locale="pt-BR"
+              mode="currency"
+            ></p-inputNumber>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Quantidade</label>
+            </div>
+            <p-inputNumber
+              [(ngModel)]="quantity"
+              [min]="0"
+              mode="decimal"
+            ></p-inputNumber>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Tipo</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="type"
+              [options]="typeOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Selecione"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="button-container">
+          <p-button (onClick)="clickSave()" icon="pi pi-check" iconPos="left" label="Salvar" styleClass="button"
+          ></p-button>
+          <p-button [routerLink]="['/product']" icon="pi pi-times" iconPos="left" label="Cancelar" styleClass="button"
+          ></p-button>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</app-template>

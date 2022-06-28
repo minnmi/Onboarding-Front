@@ -1,0 +1,36 @@
+<div class="layout-topbar">
+  <div class="layout-topbar-logo">
+    <img class="" src="assets/layout/images/topbar/totem-logo.png">
+    <img class="" src="assets/layout/images/topbar/totem-logo-1.png">
+    <div class="logo-container">
+      <span class="logo-title">Sistema de Onboarding</span>
+      <span class="logo-title">Treinamento</span>
+    </div>
+  </div>
+  <ul class="layout-topbar-menu" role="menu">
+    <li #profile [ngClass]="{'active-topmenuitem':template.activeTopbarItem === profile}" class="user-profile"
+        role="menuitem">
+      <a (click)="template.onTopbarItemClick($event,profile)">
+        <div class="user-profile-info profile-link">
+          <span class="user-profile-name" style="text-transform: capitalize">Miriam</span>
+          <span class="user-profile-role">Dev</span>
+        </div>
+        <img alt="prestige-layout" class="logo" src="assets/layout/images/avatar/user-icon.jpeg"/>
+      </a>
+      <ul class="fadeInDown">
+        <li class="profile-detail">
+          <div class="user-profile-info">
+            <img alt="prestige-layout" class="logo" src="assets/layout/images/avatar/user-icon.jpeg"/>
+            <div class="profile-info">
+              <span class="user-profile-name" style="text-transform: capitalize">Miriam</span>
+              <span class="user-profile-role">Usuário</span>
+            </div>
+            <a (click)="template.onTopbarSubItemClick($event)" class="profile-detail-icon" href="#">
+              <i class="pi pi-sign-out"></i>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

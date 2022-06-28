@@ -1,0 +1,13 @@
+<div class="app-template">
+  <p-toast position="top-right"></p-toast>
+  <app-topbar></app-topbar>
+  <app-menu></app-menu>
+  <app-action-bar></app-action-bar>
+  <div class="layout-content">
+    <ng-content></ng-content>
+  </div>
+  <app-footer></app-footer>
+  <div class="layout-mask"></div>
+  <div *ngIf="configDialogActive" [@mask-anim]="'visible'" class="layout-config-mask"></div>
+
+</div>

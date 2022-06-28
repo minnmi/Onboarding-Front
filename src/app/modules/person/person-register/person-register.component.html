@@ -1,0 +1,88 @@
+<app-template>
+  <div class="person-register">
+    <div class="person-container">
+      <span class="title">Cadastro Cliente</span>
+      <p-panel class="novo" header="Novo">
+        <div class="grid">
+          <div class="col-3">
+            <div class="col-12">
+              <label>Tipo</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="type"
+              [options]="tipo"
+              optionLabel="name"
+              optionValue="key"
+              placeholder="Selecione">
+            </p-dropdown>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>{{getDocumentLabel()}}</label>
+            </div>
+            <p-inputMask [(ngModel)]="document" [mask]="getDocumentMask()"></p-inputMask>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>{{getNameLabel()}}</label>
+            </div>
+            <input [(ngModel)]="name" class="input input-fix" pInputText type="text"/>
+          </div>
+          <div class="col-3">
+            <div class="col-12">
+              <label>Situação</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="status"
+              [options]="situacoes"
+              optionLabel="name"
+              optionValue="key"
+              placeholder="Selecione">
+            </p-dropdown>
+          </div>
+          <div *ngIf="isLegalPerson()" class="col-3">
+            <div class="col-12">
+              <label>Inscrição Estadual</label>
+            </div>
+            <input [(ngModel)]="inscricaoEstadual" class="input" pInputText type="text"/>
+          </div>
+          <div *ngIf="isNaturalPerson()" class="col-3">
+            <div class="col-12">
+              <label>Sexo</label>
+            </div>
+            <p-dropdown
+              [(ngModel)]="gender"
+              [options]="sexo"
+              optionLabel="name"
+              optionValue="key"
+              placeholder="Selecione">
+            </p-dropdown>
+          </div>
+          <div *ngIf="isNaturalPerson()" class="col-3">
+            <div class="col-12">
+              <label>Data de Nascimento</label>
+            </div>
+            <p-inputMask [(ngModel)]="birth" [mask]="getBirthMask()" class="input-fix"></p-inputMask>
+          </div>
+        </div>
+        <p-tabView>
+          <p-tabPanel header="Endereço">
+            <app-person-address (addAddress)="addAddress($event)"></app-person-address>
+          </p-tabPanel>
+          <p-tabPanel header="Contato Telefônico">
+            <app-person-phone (addPhone)="addPhone($event)"></app-person-phone>
+          </p-tabPanel>
+          <p-tabPanel header="E-mail">
+            <app-person-email (addEmail)="addEmail($event)"></app-person-email>
+          </p-tabPanel>
+        </p-tabView>
+        ,
+        <div class="button-container">
+          <p-button (onClick)="save()" icon="pi pi-check" iconPos="left" label="Salvar" styleClass="button"></p-button>
+          <p-button (onClick)="cancel()" icon="pi pi-times" iconPos="left" label="Cancelar"
+                    styleClass="button"></p-button>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</app-template>

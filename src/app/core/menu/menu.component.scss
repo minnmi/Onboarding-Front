@@ -1,0 +1,113 @@
+::ng-deep .app-menu {
+  display: flex;
+  flex: 1;
+  width: 100%;
+
+  p-menubar {
+    width: 100%;
+  }
+
+  .p-menubar {
+    width: 100%;
+    background-color: #2555BE !important;
+    padding: 0;
+    border-radius: 0;
+    border-top: 1px solid #2555BE;
+
+    .p-menuitem {
+      .p-menuitem-link:hover {
+        background-color: #678ee1 !important;
+      }
+
+      .p-menuitem-icon {
+        font-size: 1.5rem;
+        color: #ffffff !important;
+        padding-right: 0.5rem;
+
+      }
+
+      .p-menuitem-text {
+        color: #ffffff !important;
+        font-size: 1rem;
+      }
+
+      span.p-menuitem-icon.fa-ticket-alt {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg) !important;
+      }
+    }
+
+    .p-menuitem-link {
+      padding: 0.5rem 1rem;
+    }
+
+    .p-menuitem.p-menuitem-active {
+      > .p-menuitem-link {
+        background-color: #678ee1 !important;
+
+        .p-menuitem-text {
+          color: #ffffff !important;
+        }
+
+        &:hover {
+          background-color: #678ee1 !important;
+        }
+      }
+    }
+
+    .p-submenu-list {
+      width: 17rem;
+
+      .p-menuitem-link:hover {
+        .p-menuitem-text {
+          color: #ffffff !important;
+        }
+      }
+
+      .p-menuitem-text {
+        color: #333333 !important;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ::ng-deep .app-menu {
+    .p-menubar {
+      padding: 0.5em;
+    }
+
+    .p-menubar-button {
+      .pi-bars {
+        color: #ffffff;
+        font-size: 1.5rem;
+      }
+    }
+
+    .p-menubar .p-menuitem .p-menuitem-icon {
+      color: #016fa0 !important;
+    }
+
+    .p-menubar .p-menuitem .p-menuitem-text {
+      color: #016fa0 !important;
+    }
+
+    .p-menuitem .p-menuitem-link {
+      &:hover {
+        background-color: #678ee1 !important;
+
+        .p-menuitem-icon, .p-menuitem-text {
+          color: #ffffff !important;
+        }
+      }
+    }
+
+    .p-submenu-list {
+      width: 100% !important;
+    }
+  }
+}

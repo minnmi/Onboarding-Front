@@ -1,0 +1,58 @@
+<app-template>
+  <div class="product-report">
+    <div class="panel-container">
+      <div class="header-container">
+        <p-fieldset legend="Relatório de Produtos">
+          <div class="grid">
+            <div class="col-6">
+              <div class="col-6">
+                <label>Categoria</label>
+              </div>
+              <p-autoComplete
+                (completeMethod)="categoriesSearch($event)" (onSelect)="onSelectCategory($event)"
+                [(ngModel)]="categorySelected" [forceSelection]="true" [suggestions]="categoryFiltereds"
+                class="autoComplete"
+                field="name" placeholder="Selecione a categoria">
+              </p-autoComplete>
+              <div class="col-6">
+                <label>Produto</label>
+              </div>
+              <p-autoComplete
+                (completeMethod)="productsSearch($event)" (onSelect)="onSelectProduct($event)"
+                [(ngModel)]="productSelected" [forceSelection]="true" [suggestions]="productFiltereds"
+                class="autoComplete"
+                field="name" placeholder="Selecione o produto">
+              </p-autoComplete>
+            </div>
+            <div class="dropdown-container">
+              <label>Situação</label>
+              <p-dropdown
+                [(ngModel)]="productReport.status"
+                [options]="situacoes"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Selecione"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="button-container">
+            <p-button
+              (click)="reportBuilder()"
+              icon="pi pi-print"
+              iconPos="left"
+              label="Imprimir"
+              styleClass="button"
+            ></p-button>
+            <p-button
+              (click)="limpar()"
+              icon="pi pi-refresh"
+              iconPos="left"
+              label="Limpar"
+              styleClass="button"
+            ></p-button>
+          </div>
+        </p-fieldset>
+      </div>
+    </div>
+  </div>
+</app-template>

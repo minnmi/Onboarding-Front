@@ -1,0 +1,53 @@
+<div class="app-person-email">
+  <div class="person-email">
+    <div class="grid">
+      <div class="col-6">
+        <div class="col-12">
+          <label>E-mail</label>
+        </div>
+        <input [(ngModel)]="email" pInputText type="text">
+      </div>
+      <div class="col-3">
+        <div class="col-12">
+          <label style="visibility: hidden">Hidden</label>
+        </div>
+        <p-button (onClick)="clickAdd()" [disabled]="!filledFields()" icon="pi pi-plus" iconPos="left" label="Adicionar"
+                  styleClass="button"></p-button>
+      </div>
+    </div>
+    <div>
+    </div>
+    <div class="table-panel">
+      <div class="title-two">
+        <span>Emails</span>
+      </div>
+    </div>
+    <p-table [value]="emails" styleClass="datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-number">#</th>
+          <th class="col-email">E-mail</th>
+          <th class="col-status" style="text-align: center">Padrão</th>
+          <th class="col-action" style="text-align: center">Ação</th>
+        </tr>
+      </ng-template>
+      <ng-template let-email let-index="rowIndex" pTemplate="body">
+        <tr>
+          <td class="col-number">{{index + 1}}</td>
+          <td class="col-email">{{toEmail(email).email}}</td>
+          <td class="col-status" style="text-align: center">
+            <p-radioButton (click)="setAsDefault(index)" [ngModel]="toEmail(email).emailDefault"
+                           [value]="'S'" name="options"></p-radioButton>
+          </td>
+          <td class="col-action" style="text-align: center">
+            <p-button (onClick)="clickEdit(email)" class="button-item" icon="pi pi-pencil"></p-button>
+            <p-button (onClick)="clickDelete(index)" class="button-item" icon="pi pi-trash"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+
+
